@@ -38,10 +38,10 @@ Usage:
                 onchange: function() {....} //optional
                 onsubmit: function() {....} //optional
                 }
-                
+
     // set a vector
     c.set('AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:L');
-    
+
     //get the value
     c.get() returns an object like:
 
@@ -49,7 +49,7 @@ Usage:
         score: 4.3,
         vector: 'AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:L'
     }
-    
+
 */
 
 var CVSS = function (id, options) {
@@ -179,7 +179,7 @@ var CVSS = function (id, options) {
             }
         }
     };
-    
+
     this.bme = {};
     this.bmgReg = {
         AV: 'NALP',
@@ -250,7 +250,16 @@ var CVSS = function (id, options) {
     l.appendChild(this.vector = e('a'));
     this.vector.className = 'vector';
     this.vector.innerHTML = 'CVSS:3.1/AV:_/AC:_/PR:_/UI:_/S:_/C:_/I:_/A:_';
-    
+    // setup the copy button/icon
+    l.appendChild(this.copyButton = e('button'))
+    this.copyButton.style.visibility = "hidden"
+    this.copyButton.className = "copyButton"
+    this.copyButton.innerHTML = '<img src="copy-icon.svg"/>'
+    this.copyButton.onclick = function () {
+        navigator.clipboard.writeText(document.querySelector(".vector").innerText)
+    }
+
+
     if (options.onsubmit) {
         f.appendChild(e('hr'));
         this.submitButton = f.appendChild(e('input'));
@@ -462,6 +471,9 @@ CVSS.prototype.update = function(newVec) {
     this.severity.className = rating.name + ' severity';
     this.severity.innerHTML = rating.name + '<sub>' + rating.bottom + ' - ' + rating.top + '</sub>';
     this.severity.title = rating.bottom + ' - ' + rating.top;
+    if (rating['name'] != '?') {
+        this.copyButton.style.visibility = "visible"
+    }
     if (this.options !== undefined && this.options.onchange !== undefined) {
         this.options.onchange();
     }
