@@ -298,3 +298,13 @@
     display: none;
     font-size: x-small;
 }
+
+.cvssjs .copy-button {
+    border-width: 0;
+    background: local;
+    cursor: pointer;
+}
+
+.cvssjs .copy-button img {
+    height: 16px;
+}
