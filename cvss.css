@@ -299,12 +299,12 @@
     font-size: x-small;
 }
 
-.cvssjs .copyButton {
+.cvssjs .copy-button {
     border-width: 0;
     background: local;
     cursor: pointer;
 }
 
-.cvssjs .copyButton img {
-    height: 16;
+.cvssjs .copy-button img {
+    height: 16px;
 }
