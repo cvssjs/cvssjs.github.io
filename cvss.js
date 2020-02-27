@@ -251,10 +251,12 @@ var CVSS = function (id, options) {
     this.vector.className = 'vector';
     this.vector.innerHTML = 'CVSS:3.1/AV:_/AC:_/PR:_/UI:_/S:_/C:_/I:_/A:_';
     // setup the copy button/icon
-    l.appendChild(this.copyButton = e('button'))
+    l.appendChild(document.createTextNode(' '));
+    l.appendChild(this.copyButton = e('a'))
     this.copyButton.style.visibility = "hidden"
     this.copyButton.className = "copy-button"
-    this.copyButton.innerHTML = '<img src="copy-icon.svg" alt="copy vector string into clipboard" />'
+    this.copyButton.title = "Copy Vector to Clipboard"
+    this.copyButton.innerHTML = 'Copy'
     this.copyButton.onclick = function () {
         navigator.clipboard.writeText(document.querySelector(".vector").innerText)
     }
